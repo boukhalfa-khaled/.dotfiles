@@ -1,0 +1,45 @@
+super + Return
+		$TERMINAL 
+
+super + v
+		$TERMINAL -e nvim
+
+super + r
+		$TERMINAL -e ranger
+
+super + w
+		$BROWSER	
+
+super + o
+		 exec dmenu_run -c -l 20 -bw 1
+
+super + y
+		 exec clipmenu  -c -l 20 -bw 1
+
+super + {equal, minus, BackSpace}
+		/home/khaled/scripts/volume.sh {up, down, toggle}
+
+super + Print
+	scrot ~/screenshots/"$(date)".jpg
+
+ctrl + Print
+	maim -s -m 10 | xclip -selection clipboard -t image/png
+
+Print
+	maim -m 10 | xclip -selection clipboard -t image/png
+
+
+super + shift + m
+		/home/khaled/scripts/mount.sh
+
+super + shift + BackSpace
+		/home/khaled/scripts/exit.sh
+
+super + F9
+		/home/khaled/scripts/copy.sh
+
+super + F2
+		/home/khaled/scripts/toggleReadingMode.sh
+
+super + p
+		mpv $(xclip -o)
