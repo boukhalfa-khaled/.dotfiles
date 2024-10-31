@@ -7,9 +7,9 @@ M.on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
 	-- set keybinds
---	keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts)
+	--	keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts)
 	keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
-	keymap.set("n", "<Leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
+	keymap.set("n", "<Leader>CA", "<cmd>Lspsaga code_action<CR>", opts)
 	keymap.set("n", "<leader>gd", ":Lspsaga peek_definition<CR>", opts)
 	keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
 	keymap.set("n", "gs", ":vsplit | Lspsaga goto_definition<CR>", opts)

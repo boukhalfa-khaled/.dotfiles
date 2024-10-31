@@ -12,3 +12,19 @@ vim.keymap.set("n", "<leader>d", '"_d')
 vim.keymap.set("v", "<leader>d", '"_d')
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<Leader>gf", vim.lsp.buf.format, {})
+--map <C-j> :cn<CR>
+--map <C-k> :cp<CR>
+
+--vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<LF>")
+--vim.keymap.set({ "n", "v" }, "<leader>Q", ":cclose<LF>")
+
+-- Function to toggle the quickfix list
+local function toggle_quickfix()
+	if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
+		vim.cmd("cclose")
+	else
+		vim.cmd("copen")
+	end
+end
+
+vim.keymap.set({ "n", "v" }, "<leader>v", toggle_quickfix)

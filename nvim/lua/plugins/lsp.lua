@@ -5,11 +5,6 @@ local config = function()
 	local lspconfig = require("lspconfig")
 	local capabilities = cmp_nvim_lsp.default_capabilities()
 
-	--icons
-	for type, icon in pairs(diagnostic_signs) do
-		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-	end
 
 	-- c/c++
 	lspconfig.clangd.setup({
@@ -74,7 +69,6 @@ local config = function()
 			},
 		},
 	})
-
 	-- Css
 	lspconfig.css_variables.setup({
 		capabilities = capabilities,
@@ -85,6 +79,27 @@ local config = function()
 			"less",
 		},
 	})
+
+	-- Tex files
+	lspconfig.texlab.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = {
+			"tex",
+		},
+	})
+
+	lspconfig.textlsp.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = {
+			"tex",
+			"txt",
+			"md",
+		},
+	})
+
+	-- css
 	lspconfig.unocss.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -95,7 +110,7 @@ local config = function()
 	})
 
 	-- typescript
-	lspconfig.tsserver.setup({
+	lspconfig.ts_ls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 		filetypes = {
@@ -103,6 +118,7 @@ local config = function()
 		},
 		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
 	})
+
 	-- php
 	lspconfig.phpactor.setup({
 		capabilities = capabilities,
@@ -111,13 +127,7 @@ local config = function()
 			"php",
 		},
 	})
-	lspconfig.intelephense.setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-		filetypes = {
-			"php",
-		},
-	})
+
 	-- html
 	lspconfig.html.setup({
 		capabilities = capabilities,
@@ -133,12 +143,17 @@ local config = function()
 		capabilities = capabilities,
 		on_attach = on_attach,
 		filetypes = {
-			"html",
-			"php",
 			"blade",
 		},
 		root_dir = lspconfig.util.root_pattern("composer.json", "package.json", "tsconfig.json", "index.html", ".git"),
 	})
+
+
+	--icons
+	for type, icon in pairs(diagnostic_signs) do
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+	end
 
 	--lua
 	local luacheck = require("efmls-configs.linters.luacheck")
@@ -154,6 +169,8 @@ local config = function()
 	-- php
 	local phpstan = require("efmls-configs.linters.phpstan")
 	local phpcbf = require("efmls-configs.formatters.phpcbf")
+	-- java
+	local javaFormater = require("efmls-configs.formatters.google_java_format")
 
 	-- configure efm server
 	lspconfig.efm.setup({
@@ -166,6 +183,7 @@ local config = function()
 			"php",
 			"html",
 			"css",
+			"java",
 		},
 		init_options = {
 			documentFormatting = true,
@@ -185,6 +203,7 @@ local config = function()
 				php = { phpstan, phpcbf },
 				html = { prettier },
 				css = { prettier },
+				java = { javaFormater },
 			},
 		},
 	})
