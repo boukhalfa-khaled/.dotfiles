@@ -7,20 +7,24 @@ super + v
 super + r
 		$TERMINAL -e ranger
 
+super + y
+  clipmenu -c -bw 3
+
 super + w
 		$BROWSER	
 
 super + o
-		 exec dmenu_run -c -l 20 -bw 1
-
-super + y
-		 exec clipmenu  -c -l 20 -bw 1
+     /usr/local/bin/dmenu_run -c -l 20 -bw 3
 
 super + {equal, minus, BackSpace}
 		/home/khaled/scripts/volume.sh {up, down, toggle}
 
+super + shift + {equal, minus}
+		/home/khaled/scripts/brightness.sh {up, down}
+
+
 super + Print
-	scrot ~/screenshots/"$(date)".jpg
+	maim -u -s -m 10 -f jpg ~/screenshots/"$(date)".jpg
 
 ctrl + Print
 	maim -s -m 10 | xclip -selection clipboard -t image/png
@@ -32,11 +36,18 @@ Print
 super + shift + m
 		/home/khaled/scripts/mount.sh
 
+super + shift + s
+		/home/khaled/scripts/screenLayout.sh
+
+
 super + shift + BackSpace
 		/home/khaled/scripts/exit.sh
 
 super + F9
 		/home/khaled/scripts/copy.sh
+
+super + F3
+		/home/khaled/scripts/wifi.sh
 
 super + F2
 		/home/khaled/scripts/toggleReadingMode.sh
